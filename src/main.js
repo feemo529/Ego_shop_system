@@ -11,6 +11,11 @@ import VueParticles from 'vue-particles'
 import axios from 'axios'
 // 配置请求的根路径
 axios.defaults.baseURL = 'https://lianghj.top:8888/api/private/v1/'
+axios.interceptors.request.use(config => {
+  // 给请求对象，添加Token验证的Authorization字段
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
 Vue.prototype.$http = axios
 
 Vue.use(VueParticles)

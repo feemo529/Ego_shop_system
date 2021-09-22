@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.21.4",
     "core-js": "^3.6.5",
-    "element-ui": "^2.4.5",
+    "element-ui": "^2.15.6",
     "less": "^4.1.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
@@ -30,6 +30,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "less-loader": "^6.2.0",
+    "live2d-widget-model-shizuku": "^1.0.5",
     "vue-cli-plugin-element": "^1.0.1",
     "vue-particles": "^1.0.9",
     "vue-template-compiler": "^2.6.11"

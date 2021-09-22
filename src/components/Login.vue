@@ -3,7 +3,7 @@
     <div class="login_box">
       <!-- 头像区域 -->
       <div class="avator_box">
-        <img src="../assets/logo.png" alt="" />
+        <img src="@/assets/images/logo.png" alt="" />
       </div>
       <!-- 登录表单区域 -->
       <el-form
@@ -33,6 +33,7 @@
       </el-form>
     </div>
     <vue-particles
+      class="particles"
       color="#dedede"
       :particleOpacity="0.8"
       :particlesNumber="80"
@@ -103,7 +104,7 @@ export default {
 <style lang="less" scope>
 .login_container {
   // background: url(./img/sourc  e.gif);
-  background-color: #252854;
+  // background-color: #11121a;
   height: 100%;
   overflow: hidden;
 }
@@ -145,5 +146,9 @@ export default {
 .btns {
   display: flex;
   justify-content: flex-end;
+}
+.particles {
+  height: 100%;
+  background-color: #11121a;
 }
 </style>
