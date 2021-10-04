@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import { initModel } from '@/assets/waifu-tips'
-import '@/assets/live2d'
-import '@/assets/waifu.css'
+import { initModel } from '../../../public/live2d/waifu-tips'
+import '../../../public/live2d/live2d'
+import '../../../public/live2d/waifu.css'
 export default {
   name: 'PhyLive2d',
   components: {},
@@ -43,7 +43,7 @@ export default {
     live2d_settings.modelId = 5 // 默认模型 ID
     live2d_settings.modelTexturesId = 1 // 默认材质 ID
     /* 在 initModel 前添加 */
-    initModel(require('@/assets/waifu-tips.json'))
+    initModel(require('../../../public/live2d/waifu-tips.json'))
   },
   methods: {}
 }

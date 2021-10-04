@@ -85,9 +85,9 @@
         </el-form-item>
         <el-form-item prop="cat_pid" label="父级分类">
           <el-cascader
-            v-model="selectedKeys"
             expandTrigger="hover"
             clearable
+            v-model="selectedKeys"
             :options="parentCateList"
             :props="cascaderProps"
             @change="parentCateChange"
@@ -220,7 +220,6 @@ export default {
       this.parentCateList = res.data
     },
     parentCateChange() {
-      console.log(this.selectedKeys)
       if (this.selectedKeys.length > 0) {
         this.addForm.cat_pid = this.selectedKeys[this.selectedKeys.length - 1]
         this.addForm.cat_level = this.selectedKeys.length

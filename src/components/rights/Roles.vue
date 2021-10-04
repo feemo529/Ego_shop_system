@@ -64,7 +64,7 @@
         <el-table-column type="index" label="#"></el-table-column>
         <el-table-column prop="roleName" label="角色名称"></el-table-column>
         <el-table-column prop="roleDesc" label="角色描述"></el-table-column>
-        <el-table-column prop="roleName" label="操作" width="300px">
+        <el-table-column label="操作" width="300px">
           <template slot-scope="scope">
             <!-- 修改用户 -->
             <el-button
