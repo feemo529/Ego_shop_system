@@ -29,7 +29,7 @@
         <el-table-column type="index" label="#"> </el-table-column>
         <el-table-column prop="goods_name" label="商品名称"></el-table-column>
         <el-table-column prop="goods_price" label="商品价格(元)" width="105px"></el-table-column>
-        <el-table-column prop="goods_number" label="商品数量" width="80px"></el-table-column>
+        <el-table-column prop="goods_number" label="商品重量" width="80px"></el-table-column>
         <el-table-column prop="add_time" label="创建时间" width="180px">
           <template slot-scope="scope">
             {{ scope.row.add_time | dateFormat }}
@@ -78,14 +78,17 @@
         <el-form-item prop="goods_name" label="商品名称">
           <el-input v-model="editForm.goods_name"></el-input>
         </el-form-item>
-        <el-form-item prop="goods_price" label="价格">
+        <el-form-item prop="goods_price" label="价格" type="number">
           <el-input v-model="editForm.goods_price"></el-input>
         </el-form-item>
-        <el-form-item prop="goods_number" label="数量">
+        <el-form-item prop="goods_weight" label="重量" type="number">
+          <el-input v-model.number="editForm.goods_weight"></el-input>
+        </el-form-item>
+        <el-form-item prop="goods_number" label="数量" type="number">
           <el-input v-model="editForm.goods_number"></el-input>
         </el-form-item>
-        <el-form-item prop="goods_weight" label="重量">
-          <el-input v-model.number="editForm.goods_weight"></el-input>
+        <el-form-item prop="goods_introduce" label="介绍">
+          <quill-editor v-model="editForm.goods_introduce" />
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -123,7 +126,6 @@ export default {
   methods: {
     async getGoodsList() {
       const { data: res } = await this.$http.get('goods', { params: this.queryInfo })
-      console.log(res)
       if (res.meta.status !== 200) return this.$message.error('获取商品列表失败')
       this.goodslist = res.data.goods
       this.total = res.data.total
