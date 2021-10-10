@@ -9,7 +9,7 @@
     <!-- 内容 -->
     <el-card>
       <!-- 搜索框 -->
-      <el-row :gutter="20">
+      <el-row>
         <el-col :span="8">
           <el-input
             placeholder="请输入内容"
@@ -39,22 +39,20 @@
           </template>
         </el-table-column>
         <el-table-column label="操作" width="130px">
-          <template slot-scope="scope">
-            <!-- 修改商品 -->
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              size="mini"
-              @click="showeditDialog(scope.row.order_id)"
-            ></el-button>
-            <!-- 修改地址 -->
-            <el-button
-              type="success"
-              icon="el-icon-location"
-              size="mini"
-              @click="removeGoodsById(scope.row.order_id)"
-            ></el-button>
-          </template>
+          <!-- 修改商品 -->
+          <el-button
+            type="primary"
+            icon="el-icon-edit"
+            size="mini"
+            @click="showeditDialog"
+          ></el-button>
+          <!-- 修改地址 -->
+          <el-button
+            type="success"
+            icon="el-icon-location"
+            size="mini"
+            @click="showProgress"
+          ></el-button>
         </el-table-column>
       </el-table>
       <!-- 分页 -->
@@ -72,37 +70,42 @@
     </el-card>
     <!-- 修改用户 -->
     <el-dialog
-      title="修改订单状态"
+      title="修改地址"
       :visible.sync="editDialogVisible"
       width="50%"
       @close="editDialogClose"
     >
-      <el-form :model="editForm" ref="editFormRef" :rules="editFormRules" label-width="100px">
-        <el-form-item prop="goods_name" label="商品名称">
-          <el-input v-model="editForm.goods_name"></el-input>
+      <el-form
+        :model="addressForm"
+        ref="addressFormRef"
+        :rules="addressFormRules"
+        label-width="100px"
+      >
+        <el-form-item prop="address1" label="省市区/县">
+          <el-cascader :options="cityData" v-model="addressForm.address1"></el-cascader>
         </el-form-item>
-        <el-form-item prop="goods_price" label="价格" type="number">
-          <el-input v-model="editForm.goods_price"></el-input>
-        </el-form-item>
-        <el-form-item prop="goods_weight" label="重量" type="number">
-          <el-input v-model.number="editForm.goods_weight"></el-input>
-        </el-form-item>
-        <el-form-item prop="goods_number" label="数量" type="number">
-          <el-input v-model="editForm.goods_number"></el-input>
-        </el-form-item>
-        <el-form-item prop="goods_introduce" label="介绍">
-          <quill-editor v-model="editForm.goods_introduce" />
+        <el-form-item prop="address2" label="详细地址">
+          <el-input v-model="addressForm.address2"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="editGoods">确 定</el-button>
+        <el-button type="primary" @click="editDialogVisible = false">确 定</el-button>
       </span>
+    </el-dialog>
+    <!-- 物流进度 -->
+    <el-dialog title="物流进度" :visible.sync="progressVisible" width="50%">
+      <el-timeline>
+        <el-timeline-item v-for="(item, index) in progressInfo" :key="index" :timestamp="item.time">
+          {{ item.context }}
+        </el-timeline-item>
+      </el-timeline>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import cityData from './citydata.js'
 export default {
   data() {
     return {
@@ -114,13 +117,22 @@ export default {
       orderslist: [],
       total: 0,
       editDialogVisible: false,
-      editForm: [],
-      editFormRules: {
-        is_send: [{ required: true, message: '请输入活商品名称', trigger: 'blur' }],
-        order_pay: [{ required: true, message: '请输入商品价格', trigger: 'blur' }],
-        order_price: [{ required: true, message: '请输入商品数量', trigger: 'blur' }],
-        goods_weight: [{ required: true, message: '请输入商品重量', trigger: 'blur' }]
-      }
+      addressForm: {
+        address1: [],
+        address2: ''
+      },
+      addressFormRules: {
+        address1: [{ required: true, message: '请选择省市区县', trigger: 'blur' }],
+        address2: [{ required: true, message: '请填写详细地址', trigger: 'blur' }]
+      },
+      cityData,
+      progressVisible: false,
+      progressInfo: [
+        {
+          context: '',
+          timestamp: ''
+        }
+      ]
     }
   },
   created() {
@@ -129,7 +141,6 @@ export default {
   methods: {
     async getOrdersList() {
       const { data: res } = await this.$http.get('orders', { params: this.queryInfo })
-      console.log(res)
       if (res.meta.status !== 200) return this.$message.error('获取订单列表失败')
       this.orderslist = res.data.goods
       this.total = res.data.total
@@ -143,9 +154,25 @@ export default {
     handleCurrentChange(newPage) {
       this.queryInfo.pagenum = newPage
       this.getOrdersList()
+    },
+    showeditDialog() {
+      this.editDialogVisible = true
+    },
+    editDialogClose() {
+      this.$refs.addressFormRef.resetFields()
+    },
+    async showProgress() {
+      const { data: res } = await this.$http.get('/kuaidi/1106975712662')
+      if (res.meta.status !== 200) return this.$message.error('获取物流信息失败!')
+      this.progressInfo = res.data
+      this.progressVisible = true
     }
   }
 }
 </script>
 
-<style></style>
+<style lang="less" scope>
+.el-cascader {
+  width: 100%;
+}
+</style>
