@@ -107,9 +107,9 @@ export default {
       activeIndex: '0',
       addForm: {
         goods_name: '',
-        goods_price: '',
-        goods_weight: '',
-        goods_number: '',
+        goods_price: 0,
+        goods_weight: 0,
+        goods_number: 0,
         goods_introduce: '',
         // 商品所属分类数组
         goods_cat: [],
@@ -155,8 +155,11 @@ export default {
       }
     },
     beforeTabLeave(activeName, oldActiveName) {
-      if (oldActiveName === '0' && this.addForm.goods_cat.length !== 3) {
-        this.$message.error('请先选择商品分类')
+      if (
+        (oldActiveName === '0' && this.addForm.goods_cat.length !== 3) ||
+        this.addForm.goods_name === ''
+      ) {
+        this.$message.error('请先填写商品完整信息')
         return false
       }
     },

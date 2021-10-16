@@ -10,8 +10,36 @@ module.exports = {
   runtimeCompiler: false,
   // webpack配置
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
-  chainWebpack: () => {},
-  configureWebpack: () => {},
+  chainWebpack: config => {
+    // 发布模式
+    config.when(process.env.NODE_ENV === 'production', config => {
+      config.entry('app').clear().add('./src/main-prod.js')
+
+      config.set('externals', {
+        vue: 'Vue',
+        'vue-router': 'VueRouter',
+        axios: 'axios',
+        lodash: '_',
+        echarts: 'echarts',
+        nprogress: 'NProgress',
+        'vue-quill-editor': 'VueQuillEditor'
+      })
+
+      config.plugin('html').tap(args => {
+        args[0].isProd = true
+        return args
+      })
+    })
+    // 开发模式
+    config.when(process.env.NODE_ENV === 'development', config => {
+      config.entry('app').clear().add('./src/main-dev.js')
+      config.plugin('html').tap(args => {
+        args[0].isProd = false
+        return args
+      })
+    })
+  },
+  configureWebpack: () => { },
   // vue-loader 配置项
   // https://vue-loader.vuejs.org/en/options.html
   // vueLoader: {},
@@ -46,7 +74,7 @@ module.exports = {
     port: 8080,
     https: false,
     hotOnly: false,
-    before: app => {}
+    before: app => { }
   },
   // 第三方插件配置
   pluginOptions: {
