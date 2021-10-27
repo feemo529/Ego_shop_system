@@ -24,7 +24,7 @@ import Breadcrumb from './components/Breadcrumb.vue'
 
 import axios from 'axios'
 // 配置请求的根路径
-axios.defaults.baseURL = 'https://lianghj.top:8888/api/private/v1/'
+axios.defaults.baseURL = 'http://182.61.23.84:8889/api/private/v1/'
 axios.interceptors.request.use(config => {
   MProgress.start()
   Loading.service({
