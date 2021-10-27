@@ -1,5 +1,5 @@
 
-##  电商后台管理系统(前端项目）  [预览](http://huangzun.top:8888/)
+##  电商后台管理系统(前端项目）  [预览](http://182.61.23.84/#/login)
 
 
 
@@ -324,7 +324,7 @@ axios.interceptors.request.use(config => {
     > 2. 在index.html头部区域中,通过cdn加载element-ui的js和css样式
     >
     >        `<link href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" rel="stylesheet">`
-    >        
+    >               
     >            `<script src="https://cdn.bootcss.com/element-ui/2.12.0/index.js"></script>`
 
 - 首页内容定制
