@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航区域 -->
-    <Breadcrumb name1="权限管理" name2="分类参数" />
+    <Breadcrumb name1="商品管理" name2="分类参数" />
     <!-- 内容主体 -->
     <el-card>
       <el-alert title="注意：只允许为第三级分类设置相关参数！" type="warning" show-icon> </el-alert>
@@ -174,7 +174,10 @@
 </template>
 
 <script>
+import Breadcrumb from '../Breadcrumb.vue'
 export default {
+  name: 'Params',
+  components: { Breadcrumb },
   data() {
     return {
       catelist: [],
@@ -371,6 +374,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.el-input__inner {
+  width: 300px;
+}
 .cat_opt {
   margin: 15px 0;
 }

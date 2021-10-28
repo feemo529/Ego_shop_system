@@ -116,7 +116,10 @@
   </div>
 </template>
 <script>
+import Breadcrumb from '../Breadcrumb.vue'
 export default {
+  name: 'Category',
+  components: { Breadcrumb },
   data() {
     return {
       // 查询条件

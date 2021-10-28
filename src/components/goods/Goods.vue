@@ -96,7 +96,10 @@
 </template>
 
 <script>
+import Breadcrumb from '../Breadcrumb.vue'
 export default {
+  name: 'Goods',
+  components: { Breadcrumb },
   data() {
     return {
       queryInfo: {

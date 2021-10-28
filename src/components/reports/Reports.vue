@@ -10,9 +10,12 @@
 </template>
 
 <script>
+import Breadcrumb from '../Breadcrumb.vue'
 import * as echarts from 'echarts'
 import _ from 'lodash'
 export default {
+  name: 'Reports',
+  components: { Breadcrumb },
   data() {
     return {
       // 需要合并的数据

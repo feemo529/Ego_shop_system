@@ -158,7 +158,10 @@
 </template>
 
 <script>
+import Breadcrumb from '../Breadcrumb.vue'
 export default {
+  name: 'User',
+  components: { Breadcrumb },
   data() {
     const checkMobile = (rule, value, cb) => {
       const reg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/

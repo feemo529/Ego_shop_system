@@ -159,7 +159,10 @@
 </template>
 
 <script>
+import Breadcrumb from '../Breadcrumb.vue'
 export default {
+  name: 'Roles',
+  components: { Breadcrumb },
   data() {
     return {
       rolesList: [],

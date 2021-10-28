@@ -21,7 +21,10 @@
 </template>
 
 <script>
+import Breadcrumb from '../Breadcrumb.vue'
 export default {
+  name: 'Rights',
+  components: { Breadcrumb },
   data() {
     return {
       rightsList: [],

@@ -34,21 +34,21 @@
             {{ scope.row.create_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="130px">
-          <!-- 修改商品 -->
-          <el-button
-            type="primary"
-            icon="el-icon-edit"
-            size="mini"
-            @click="showeditDialog"
-          ></el-button>
-          <!-- 修改地址 -->
-          <el-button
-            type="success"
-            icon="el-icon-location"
-            size="mini"
-            @click="showProgress"
-          ></el-button>
+        <el-table-column label="操作" width="140px">
+          <template v-slot="">
+            <!-- 修改地址 -->
+            <el-button type="primary" icon="el-icon-edit" size="mini" @click="showeditDialog" round>
+            </el-button>
+            <!-- 物流进度 -->
+            <el-button
+              type="success"
+              icon="el-icon-location"
+              size="mini"
+              @click="showProgress"
+              round
+            >
+            </el-button>
+          </template>
         </el-table-column>
       </el-table>
       <!-- 分页 -->
@@ -101,8 +101,11 @@
 </template>
 
 <script>
+import Breadcrumb from '../Breadcrumb.vue'
 import cityData from './citydata.js'
 export default {
+  name: 'Orders',
+  components: { Breadcrumb },
   data() {
     return {
       queryInfo: {
