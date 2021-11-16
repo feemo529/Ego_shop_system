@@ -44,6 +44,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 // 为路由对象,添加beforeEach导航守卫
