@@ -42,7 +42,7 @@
 
   ##### [接口API](./api接口文档.md).
 
-  后端源码  [下载](https://gitee.com/wBekvam/vueShop-api-server.git).
+  后端源码  [下载](https://github.com/feemo529/Ego_shop_api).
 
 ### 项目初始化
 
